@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "stack.h"
+#include "queue.h"
 
 typedef int tree_node_elem_t;
 
@@ -121,6 +122,29 @@ void post_order(const binary_tree_node_t *root, int (*visit)(const binary_tree_n
     stack_destroy(stack);
 }
 
+void level_order(const binary_tree_node_t *root, int (*visit)(const binary_tree_node_t *))
+{
+    const binary_tree_node_t *p = root;
+    struct queue *queue = queue_init(128);
+
+    if (queue == NULL)
+        return;
+
+    if (p != NULL)
+        queue_push(queue, (void *)p);
+
+    while (!is_queue_empty(queue)) {
+        p = queue_pop(queue);
+        visit(p);
+
+        if (p->left != NULL)
+            queue_push(queue, p->left);
+        if (p->right != NULL)
+            queue_push(queue, p->right);
+    }
+
+    queue_destroy(queue);
+}
 int main(int argc, char **argv)
 {
     binary_tree_node_t *root = malloc(sizeof(binary_tree_node_t));
@@ -156,6 +180,9 @@ int main(int argc, char **argv)
     in_order(root, visit);
     puts("\n-------");
     post_order(root, visit);
+    puts("\n");
+
+    level_order(root, visit);
     puts("");
 
     return 0;

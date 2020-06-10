@@ -2,7 +2,7 @@ all: binary_tree
 
 CFLAGS := -Wall
 
-binary_tree: main.o stack.o
+binary_tree: main.o stack.o queue.o
 	$(CC) -o $@ $^
 
 %.o: %.c
