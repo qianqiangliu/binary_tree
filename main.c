@@ -47,7 +47,7 @@ void post_order_r(const binary_tree_node_t *root, int (*visit)(const binary_tree
 void pre_order(const binary_tree_node_t *root, int (*visit)(const binary_tree_node_t *))
 {
     const binary_tree_node_t *p = root;
-    stack_t *stack = stack_init(128);
+    struct stack *stack = stack_init(128);
 
     if (stack == NULL)
         return;
@@ -71,7 +71,7 @@ void pre_order(const binary_tree_node_t *root, int (*visit)(const binary_tree_no
 void in_order(const binary_tree_node_t *root, int (*visit)(const binary_tree_node_t *))
 {
     const binary_tree_node_t *p = root;
-    stack_t *stack = stack_init(128);
+    struct stack *stack = stack_init(128);
 
     if (stack == NULL)
         return;
@@ -94,7 +94,7 @@ void post_order(const binary_tree_node_t *root, int (*visit)(const binary_tree_n
 {
     const binary_tree_node_t *p = root;
     const binary_tree_node_t *q;
-    stack_t *stack = stack_init(128);
+    struct stack *stack = stack_init(128);
 
     if (stack == NULL)
         return;
